@@ -1,0 +1,56 @@
+cd Lab_1
+
+mkdir Work
+
+cd Work
+
+mkdir "Лабораторная работа №1!" "Крылов Григорий Вадимович"
+
+chmod 772 "Лабораторная работа №1!"
+
+chmod 200 "Крылов Григорий Вадимович"
+
+cat << EOF > "Text @1"
+Птица говорун отличается умом и сообразительностью!
+Отличается умом, отличается сообразительностью...
+EOF
+
+cat "Text @1" > "Text $2"
+
+sudo cp "Text @1" "Крылов Григорий Вадимович"
+
+gzip "Text @1" "Text #3"
+
+tar -cf MyAchiv.rar "Text @1.gz" "Text #3.gz"
+
+gzip -d "Text @1.gz" "Text #3.gz"
+
+head -n 1 "Text @1" | cat - "Text #3" > temp && mv temp "Text #3"
+
+echo "Будь осторожен! Преступник вооружен!" >> "Text #3"
+
+sudo touch "Крылов Григорий Вадимович"/"Result_one"
+
+chmod 300 "Крылов Григорий Вадимович"
+
+sudo tac "Text @1" > "Крылов Григорий Вадимович"/"Result_one"
+
+mv "Крылов Григорий Вадимович"/Result_one "Крылов Григорий Вадимович"/Result_two
+
+touch "Лабораторная работа №1!"/Result_3
+
+chmod 700 "Крылов Григорий Вадимович"
+
+for item in "Крылов Григорий Вадимович"/T*; do
+ if [ -d "$item" ]; then
+  sudo ls "$item" > "Лабораторная работа №1!"/Result_3 ;
+ elif [ -f "$item" ];then
+  cat "$item" >> "Лабораторная работа №1!"/Result_3; 
+ fi;
+done
+
+chmod 200 "Крылов Григорий Вадимович"
+
+uname -a >> "Лабораторная работа №1!"/Result_3
+
+date >> "Лабораторная работа №1!"/Result_3
