@@ -35,7 +35,16 @@ print_symbol:
     dec rbx
     jnz .print
 
+    
+    mov rax, 10           
+    mov [buffer], al       
+    mov eax, 1             
+    mov edi, 1             
+    mov rsi, buffer        
+    mov edx, 1       
+    syscall                
     ret
+
 
 .one_symbol:
     add rax, '0'
