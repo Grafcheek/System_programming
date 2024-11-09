@@ -8,14 +8,14 @@ int main(int argc, char *argv[]) {
         int c = atoi(argv[3]);
         
         if (b == 0) {
-            printf("Invalid input\n");
+            printf("Invalid input: division by zero\n");
             return 1;
         }
 
-        double result = ((((((double)a / b) - a) / b) * c) + a);
-        printf("%lf\n", result);
+        int result = (((((a / b) - a) / b) * c) + a);
+        printf("%d\n", result);
     } else {
-        printf("Invalid input\n");
+        printf("Invalid input: please provide three integers\n");
     }
     return 0;
 }

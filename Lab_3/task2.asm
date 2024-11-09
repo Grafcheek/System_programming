@@ -94,6 +94,15 @@ print_symbol:
     mov rsi, buffer 
     mov edx, 1 
     syscall 
+    
+    ; Добавление новой строки
+    mov rax, 10            ; ASCII код новой строки '\n'
+    mov [buffer], al       ; Помещаем его в буфер
+    mov eax, 1             ; Системный вызов для записи (sys_write)
+    mov edi, 1             ; Дескриптор файла для stdout
+    mov rsi, buffer        ; Указатель на буфер
+    mov edx, 1             ; Размер данных для записи (1 байт)
+    syscall                ; Вызов системного вызова для вывода новой строки
     ret 
  
 _start: 
