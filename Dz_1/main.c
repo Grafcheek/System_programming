@@ -6,9 +6,9 @@ extern long *free_queue();
 extern long q_push(long);
 extern long q_pop();
 extern void rand_fill(long);
-extern long count_simple_numbers();
 extern long ends_with_one();
-extern long count_odd();
+extern long count_even();
+extern void remove_even_and_push_odd_back();
 
 int main() {
   long *arr, n, cap;
@@ -20,18 +20,17 @@ int main() {
   }
 
   cap = 5;
-  rand_fill(cap);
+  rand_fill(cap);  // Заполнение случайными числами
 
   for (int i = 0; i < cap; i++) {
     printf("%ld\n", arr[i]);
   }
 
-  printf("simple=%ld ones=%ld odd=%ld\n\n", count_simple_numbers(),
-         ends_with_one(), count_odd());
+  printf("ends with 1 = %ld\n", ends_with_one());
+  printf("even count = %ld\n", count_even());
 
-  for (int i = cap; i < n; i++) {
-    q_push(i);
-  }
+  // Удаление четных чисел и возврат нечетных в конец
+  remove_even_and_push_odd_back();
 
   for (int i = 0; i < n; i++) {
     printf("%ld\n", arr[i]);
@@ -44,4 +43,3 @@ int main() {
 
   return 0;
 }
-

@@ -13,9 +13,9 @@ section '.text' executable
     public q_push
     public q_pop
     public rand_fill
-    public count_simple_numbers
     public ends_with_one
-    public count_odd
+    public count_even
+    public remove_even_and_push_odd_back
 
 include 'func.asm'
 
@@ -24,19 +24,18 @@ init_queue:
     imul rbx, 8
     mov [size],rbx
 
-	mov rdi, 0
-	mov rsi, rbx
-	mov rdx, 0x3
-	mov r10,0x22
-	mov r8, -1
-	mov r9, 0
-	mov rax, 9
-	syscall
+    mov rdi, 0
+    mov rsi, rbx
+    mov rdx, 0x3
+    mov r10,0x22
+    mov r8, -1
+    mov r9, 0
+    mov rax, 9
+    syscall
 
     mov [head], rax
     mov [tail], rax
     ret
-
 
 free_queue:
     mov rdi, [head]
@@ -46,20 +45,15 @@ free_queue:
     ret
 
 q_push:
-
     mov rbx, [tail]
     mov rcx, [head]
     add rcx, [size]
-
-
     cmp rbx, rcx
     jae .overflow
-
 
     mov [rbx], rdi
     add rbx, 8
     mov [tail], rbx
-
     mov rax, 0
     ret
 
@@ -75,7 +69,6 @@ q_pop:
     .loop:
         mov rbx, [rax+8]
         mov [rax], rbx
-
         add rax, 8
         add rcx, 8
         cmp rcx, [size]
@@ -112,52 +105,6 @@ rand_fill:
     syscall
     ret
 
-count_simple_numbers:
-    xor r8, r8
-    mov r9, [head]
-    .loop:
-    cmp r9, [tail]
-    jge .fin
-    mov rdi, [r9]
-    call simple_check
-    add r9, 8
-    cmp rax, 1
-    jne .loop
-    inc r8
-    jmp .loop
-    .fin:
-    mov rax, r8
-    ret
-
-simple_check:
-    push r8
-    push r9
-    mov rax, 1
-    cmp rdi, 2
-    jnl .f
-    .nf:
-    xor rax, rax
-    jmp .fin
-    .f:
-    mov r8, 2
-    mov r9, rdi
-    .loop:
-    cmp r8, r9
-    je .fin
-    xor rdx, rdx
-    push rax
-    mov rax, r9
-    div r8
-    pop rax
-    cmp rdx, 0
-    je .nf
-    inc r8
-    jmp .loop
-    .fin:
-    pop r9
-    pop r8
-    ret
-
 ends_with_one:
     xor r8, r8
     mov r9, [head]
@@ -177,27 +124,38 @@ ends_with_one:
     mov rax, r8
     ret
 
-count_odd:
-    mov rbx, [head]
+count_even:
     xor r8, r8
-    jmp .loop
-
-
-
+    mov r9, [head]
     .loop:
-    cmp rbx, [tail]
+    cmp r9, [tail]
     jge .fin
-
-    mov rax, [rbx]
-    add rbx, 8
-    xor rdx, rdx
-    mov rcx, 2
-    div rcx
-    cmp rdx, 0
-    je .loop
+    mov rdi, [r9]
+    test rdi, 1  ; Проверка на четность
+    jnz .skip
     inc r8
+    .skip:
+    add r9, 8
     jmp .loop
-
     .fin:
     mov rax, r8
+    ret
+
+remove_even_and_push_odd_back:
+    mov r9, [head]
+    .loop:
+    cmp r9, [tail]
+    jge .fin
+    mov rdi, [r9]
+    test rdi, 1  ; Проверка на четность
+    jz .even
+    jmp .odd
+    .even:
+    call q_pop
+    jmp .loop
+    .odd:
+    call q_pop
+    call q_push
+    jmp .loop
+    .fin:
     ret
