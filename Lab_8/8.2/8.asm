@@ -14,8 +14,8 @@ section '.data' writable
     true_output db "True number: %.15f for x: %.2f", 0xA, 0
     calc_output db "Calc number: %.15f for x: %.2f", 0xA, 0
     e_real dq 2.71828182846
-    delta dq 0.0000001
-    diff dq 0.0
+    delta dq 0.000001
+    diff dq 0.01
 
     zero dq 0.0
     one dq 1.0
