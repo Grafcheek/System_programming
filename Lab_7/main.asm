@@ -6,8 +6,8 @@ public _start
 
 section '.bss' writable
     msg1 db "Введите команду", 0
-    filename1 db "input", 0
-    filename2 db "result", 0
+    filename1 db "input.txt", 0
+    filename2 db "output.txt", 0
     argv rq 5
     input rb 100
 

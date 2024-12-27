@@ -1,0 +1,2 @@
+number of letters: 20
+number of digits: 10
