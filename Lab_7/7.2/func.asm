@@ -1,8 +1,10 @@
+;;My library of useful functions named func.asm
+
 ;Function exit
 exit:
-	mov rax, 0x3c
-	mov rdi, 0
-	syscall
+     mov rax, 60
+     mov rdi, 0
+     syscall
 
 ;Function printing of string
 ;input rsi - place of memory of begin string
@@ -139,7 +141,7 @@ input_keyboard:
 
   mov rax, 0
   mov rdi, 0
-  mov rdx,  10000
+  mov rdx, 255
   syscall
 
   xor rcx, rcx

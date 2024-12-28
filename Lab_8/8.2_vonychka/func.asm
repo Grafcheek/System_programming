@@ -123,7 +123,7 @@ number_str:
     dec rcx
     cmp rcx, 0
   jne .loop_2
-  mov byte [rsi+rdx], 0   
+  mov byte [rsi+rdx], 0
   pop rdx
   pop rcx
   pop rbx
@@ -131,7 +131,7 @@ number_str:
 
 
 ;The function realizates user input from the keyboard
-;input: rsi - place of memory saved input string 
+;input: rsi - place of memory saved input string
 input_keyboard:
   push rax
   push rdi
@@ -150,7 +150,7 @@ input_keyboard:
      jne .loop
   dec rcx
   mov byte [rsi+rcx], 0
-  
+
   pop rdx
   pop rdi
   pop rax
